@@ -1,0 +1,13 @@
+tweet_id,writer,post_date,body,comment_num,retweet_num,like_num,report_num,is_retweet,original_tweet_id
+1,user1,1420070807,This is User1's Tweet No. 1,0,0,0,0,f,
+2,user1,1420071005,This is User1's Tweet No. 2,0,0,0,0,f,
+3,user1,1420071005,This is User1's Tweet No. 3,0,0,0,0,f,
+4,user2,1420071005,This is User2's Tweet No. 1,0,0,0,0,f,
+5,user2,1420071016,This is User2's Tweet No. 2,0,0,0,0,f,
+6,user2,1420071017,This is User2's Tweet No. 3,0,0,0,0,f,
+7,user3,1420071017,This is User3's Tweet No. 1,0,0,0,0,f,
+8,user3,1420071017,This is User3's Tweet No. 2,0,0,0,0,f,
+9,user3,1420071077,This is User3's Tweet No. 3,0,0,0,0,f,
+10,user4,1420071282,This is User4's Tweet No. 1,0,0,0,0,f,
+11,user4,1420071282,This is User4's Tweet No. 2,0,0,0,0,f,
+12,user4,1420071305,This is User4's Tweet No. 3,0,0,0,0,f,
