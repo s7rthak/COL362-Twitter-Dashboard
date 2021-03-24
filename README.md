@@ -21,3 +21,12 @@ Assumptions:
 1. All users have 0 followers
 2. No tweet has been reported
 3. No current user have liked/retweeted/commented on any tweets
+
+
+## TODOs
+
+- [ ] HTML: actions_page.html, tweets.html
+
+- [ ] DATA: 8 csv files
+
+- [ ] LINKING: Flask & postgres
