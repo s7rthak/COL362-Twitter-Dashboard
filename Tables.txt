@@ -1,14 +1,14 @@
-tweet(tweet_id, writer, post_date, body, comment_num, retweet_num, like_num, **is_retweet, **original_tweet_id, **num_reports)
+tweet(tweet_id, writer, post_date, body, comment_num, retweet_num, like_num, **report_num, **is_retweet, **original_tweet_id) 
 
 company_tweet(tweet_id, ticker_symbol)
 
 company(ticker_symbol, company_name)
 
-user(user_id, password, num_tweets, num_followers)
+users(user_id, password, tweet_num, follower_num)
 
 follower(user_id1, user_id2)  # User2 follows User1
 
-like(user_id, tweet_id)
+favourite(user_id, tweet_id)
 
 comment(comment_id, user_id, tweet_id, comment_date, body)
 
