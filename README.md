@@ -27,6 +27,6 @@ Assumptions:
 
 - [ ] HTML: actions_page.html, tweets.html
 
-- [x] DATA: 8 csv files - `copy the make_all_tables.py` file to the location where the original 3 .csv files are present and running the python file will generate the 8 needed csv files.
+- [x] DATA: 8 csv files - copy the `make_all_tables.py` file to the location where the original 3 .csv files are present and running the python file will generate the 8 needed csv files.
 
 - [ ] LINKING: Flask & postgres
