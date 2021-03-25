@@ -9,7 +9,10 @@ db_test: # Data/build/drop.sql Data/build/db_build_test.sql Data/DB_test/comment
 	sudo -u postgres psql db_test -f Data/build/db_build_test.sql
 
 server:
-	. venv/bin/activate && python3 app.py
+	. venv/bin/activate && python3 app.py db
+
+server_test:
+	. venv/bin/activate && python3 app.py db_test
 
 clean:
 	sudo -u postgres psql db -f Data/build/drop.sql
