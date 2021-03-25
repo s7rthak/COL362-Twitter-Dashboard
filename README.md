@@ -22,6 +22,101 @@ Assumptions:
 2. No tweet has been reported
 3. No current user have liked/retweeted/commented on any tweets
 
+# Running the server on local machine
+
+## Preparation
+
+1. Install requirements:
+
+   - postgresql
+
+   - python3
+
+   - python3-virtualenv
+
+   ```
+   sudo apt install python3-virtualenv
+   ```
+
+2. Create python virtual environment venv in the project directory
+
+   ```
+   virtualenv --no-site-packages venv
+   ```
+
+   If above command doesn't work try
+
+   ```
+   virtualenv venv
+   ```
+
+   Install dependencies in the virtual environment
+
+   - Switch to virtual environment
+
+     ```
+     source venv/bin/activate
+     ```
+
+   - Install `flask` and `psycopg2` in venv environment
+
+     ```
+     pip install flask
+     pip install psycopg2
+     ```
+
+     
+
+3. Create new super user for postgres named "dbms_project" with password "dbms_project"
+
+   ```
+   sudo -u postgres createuser -s -i -d -r -l -w dbms_project
+   sudo -u postgres psql -c "ALTER ROLE dbms_project WITH PASSWORD 'dbms_project';"
+   ```
+
+4. Create new databases with owner as the new user
+
+   ```
+   CREATE DATABASE db OWNER dbms_project;
+   CREATE DATABASE db_test OWNER dbms_project;
+   ```
+
+## Execution
+
+1. Connecting to Database:
+
+   - Refresh original database
+
+     ```
+     make db
+     ```
+
+   - Refresh test database
+
+     ```
+     make db_test
+     ```
+
+   - To empty both the databases
+
+     ```
+     make clean
+     ```
+
+2. Starting the server
+
+   - With original database
+
+     ```
+     make server
+     ```
+
+   - With test database
+
+     ```
+     make server_test
+     ```
+
 
 ## TODOs
 
