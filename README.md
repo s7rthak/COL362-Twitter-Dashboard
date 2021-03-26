@@ -124,7 +124,7 @@ Assumptions:
 
 - [ ] HTML: actions_page.html, tweets.html
 - [ ] Update `make_all_tables.py` as per updated `DB_test`
-- [ ] Actions and Triggers
+- [ ] Complete Actions and Triggers in `triggers.sql` and `db_build.sql`
 
 ## UPDATES:
 
