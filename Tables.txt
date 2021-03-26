@@ -1,10 +1,10 @@
-tweet(tweet_id, writer, post_date, body, comment_num, retweet_num, like_num, **report_num, **is_retweet, **original_tweet_id) 
+tweet(tweet_id, writer, post_date, body, comment_num, retweet_num, like_num, report_num, is_retweet, original_tweet_id) 
 
 company_tweet(tweet_id, ticker_symbol)
 
 company(ticker_symbol, company_name)
 
-users(user_id, password, tweet_num, follower_num)
+users(user_id, user_name, password, tweet_num, follower_num, comment_num, retweet_num, like_num, report_num)
 
 follower(user_id1, user_id2)  # User2 follows User1
 
@@ -13,3 +13,11 @@ favourite(user_id, tweet_id)
 comment(comment_id, user_id, tweet_id, comment_date, body)
 
 report(user_id, tweet_id) # If num_reports == 100 then we delete the tweet: TRIGGER
+
+tweet_hash(tweet_id, hash)
+
+********** Not in use (Just for Reference): **********
+
+user_data(user_id, popularity = 3 * likes_num + 7 * retweet_num)
+
+tweet_data(tweet_id, popularity = 4 * like_num + 6 * retweet_num - report_num)
