@@ -1,23 +1,22 @@
-<html>
-  <head>
-    <title>MNC Twitter - login page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Please login</h1>
-      <br>
-      <form action="" method="post">
-        <input type="text" placeholder="Username" name="username" value="{{
-          request.form.username }}">
-         <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
-      </form>
-      {% if error %} <!-- If there is a non-None error -->
-        <p class="error"><strong>Error:</strong> {{ error }}</p> <!-- Error text is displayed along with the content -->
-      {% endif %}
-    </div>
-  </body>
-</html>
+{% extends "base_login.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block login_class %}class="active"{% endblock %}
+
+{% block content %}
+	<div class="login-page">
+		<div class="form">
+			<form action="" method="post">
+				<input type="text" placeholder="username" name="username" value="{{request.form.username }}">
+				<input type="password" placeholder="password" name="password" value="{{request.form.password }}">
+				<!-- <input class="btn btn-default" type="submit" value="LOGIN"> -->
+				<button>login</button>
+				<p class="message">Not registered? <a href="/signup">Create an account</a></p>
+			</form>
+			{% if error %} <!-- If there is a non-None error -->
+				<p class="error"><strong>Error:</strong> {{ error }}</p> <!-- Error text is displayed along with the content -->
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+<html>
+<head>
+	<title>{{ usr }} {% block title %} {% endblock %} - MNCTwitter</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {margin:0;}
+
+		body {
+			background: #ffffff; /* fallback for old browsers */
+			background: -webkit-linear-gradient(right, #ffffff, #99ccff);
+			background: -moz-linear-gradient(right, #ffffff, #99ccff);
+			background: -o-linear-gradient(right, #ffffff, #99ccff);
+			background: linear-gradient(to left, #ffffff, #99ccff);
+			font-family: "Roboto", sans-serif;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;      
+		}
+
+		.navbar {
+			overflow: hidden;
+			background-color: #333;
+			position: fixed;
+			top: 0;
+			width: 100%;
+		}
+
+		.navbar a {
+			float: left;
+			display: block;
+			color: #f2f2f2;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			font-size: 17px;
+		}
+
+		.navbar a:hover {
+			background: #ddd;
+			color: black;
+		}
+
+		.main {
+			padding: 16px;
+			margin-top: 30px;
+			height: 1500px; /* Used in this example to enable scrolling */
+		}
+
+		.navbar a.active {
+		  background-color: #4CAF50;
+		  color: white;
+		}
+
+		.navbar a.user {
+		  background-color: #99ccff;
+		  color: black;
+		}
+
+		{% block style %} {% endblock %}
+	</style>
+</head>
+<body>
+
+	<div class="navbar">
+		<img src={{ image["logo"] }} alt="logo" width="50cm" style="float:right">
+		<a {% block home_class %} class="not-active" {% endblock %} href="/"><img src={{ image["home"] }} alt="home" width="25cm" style="vertical-align:middle"> Home</a>
+		<a {% block post_tweet_class %} class="not-active" {% endblock %} href="/post_tweet"><img src={{ image["post_tweet"] }} alt="post_tweet" width="25cm" style="vertical-align:middle"> Post</a>
+		<a {% block my_tweets_class %} class="not-active" {% endblock %} href="/my_tweets"><img src={{ image["my_tweets"] }} alt="my_tweets" width="25cm" style="vertical-align:middle"> My Tweets</a>
+		<a {% block users_class %} class="not-active" {% endblock %} href="/users"><img src={{ image["users"] }} alt="users" width="25cm" style="vertical-align:middle"> Search Users</a>
+		<a {% block read_tweets_class %} class="not-active" {% endblock %} href="/read_tweets"><img src={{ image["read_tweets"] }} alt="read_tweets" width="25cm" style="vertical-align:middle"> Read Tweets</a>
+		<a {% block network_analysis_class %} class="not-active" {% endblock %} href="/network_analysis"><img src={{ image["network_analysis"] }} alt="network_analysis" width="25cm" style="vertical-align:middle"> Network Analysis</a>
+		<a {% block company_analysis_class %} class="not-active" {% endblock %} href="/company_analysis"><img src={{ image["company_analysis"] }} alt="company_analysis" width="25cm" style="vertical-align:middle"> Company Analysis</a>
+		<a {% block account_class %} class="not-active" {% endblock %} href="/account"><img src={{ image["account"] }} alt="account" width="25cm" style="vertical-align:middle"> Account Settings</a>
+		<a {% block logout_class %} class="not-active" {% endblock %} href="/logout"><img src={{ image["logout"] }} alt="logout" width="25cm" style="vertical-align:middle"> logout</a>
+		<a class="user" href="/"><img src={{ image["usr"] }} alt="logo" width="25cm" style="vertical-align:middle"> {{ usr }}</a>
+	</div>
+
+	
+	{% block content %} {% endblock %}
+</body>
+</html>

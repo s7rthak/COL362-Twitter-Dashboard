@@ -1,1 +1,1 @@
-tweet_id,writer,post_date,body,comment_num,retweet_num,like_num,report_num,is_retweet,original_tweet_id
+writer,post_date,body,comment_num,retweet_num,like_num,report_num,is_retweet,original_tweet_id

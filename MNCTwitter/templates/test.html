@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>MNC Twitter - login page</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="static/bootstrap.rtl.css" rel="stylesheet" media="screen">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Please login</h1>
+			<br>
+			<form action="" method="post">
+				<input type="text" placeholder="Username" name="username" value="{{request.form.username }}">
+				<input type="password" placeholder="Password" name="password" value="{{request.form.password }}">
+				<input class="btn btn-default" type="submit" value="Login">
+			</form>
+			{% if error %} <!-- If there is a non-None error -->
+				<p class="error"><strong>Error:</strong> {{ error }}</p> <!-- Error text is displayed along with the content -->
+			{% endif %}
+		</div>
+		<h2>OR</h2>
+		<div class="container">
+			<h1>Create a new account</h1>
+			<br>
+			<form action="" method="post">
+				<input type="text" placeholder="Select Username" name="username" value="{{request.form.username }}">
+				<input type="password" placeholder="Select Password" name="password" value="{{request.form.password }}">
+				<input type="password" placeholder="Rewrite Password" name="repassword" value="{{request.form.repassword }}">
+				<input class="btn btn-default" type="submit" value="Sign Up">
+			</form>
+			{% if error %} <!-- If there is a non-None error -->
+				<p class="error"><strong>Error:</strong> {{ error }}</p> <!-- Error text is displayed along with the content -->
+			{% endif %}
+			<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+		</div>
+	</body>
+</html>
