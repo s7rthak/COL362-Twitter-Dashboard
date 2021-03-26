@@ -1,8 +1,0 @@
-HTML:
-	actions_page.html, tweets.html
-
-DATA:
-	8 csv files
-
-LINKING:
-	Flask & postgres
