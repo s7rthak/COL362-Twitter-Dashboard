@@ -83,7 +83,9 @@ Assumptions:
 
 ## Execution
 
-1. Connecting to Database:
+1. Making the CSV files: copy the `make_all_tables.py` file to the location where the original 3 .csv files are present and running the python file will generate the 8 needed csv files.
+
+2. Connecting to Database:
 
    - Refresh original database
 
@@ -103,7 +105,7 @@ Assumptions:
      make clean
      ```
 
-2. Starting the server
+3. . Starting the server
 
    - With original database
 
@@ -121,7 +123,11 @@ Assumptions:
 ## TODOs
 
 - [ ] HTML: actions_page.html, tweets.html
+- [ ] Update `make_all_tables.py` as per updated `DB_test`
+- [ ] Actions and Triggers
 
-- [x] DATA: 8 csv files - copy the `make_all_tables.py` file to the location where the original 3 .csv files are present and running the python file will generate the 8 needed csv files.
+## UPDATES:
 
-- [ ] LINKING: Flask & postgres
+- Tables.txt: Some tables have been updated
+- CSV Files: `SERIAL` data type columns should not be in CSV files (Check updated DB_test)
+- Build files: `db_build.sql` and `db_test_build.sql` updated as per new schema
