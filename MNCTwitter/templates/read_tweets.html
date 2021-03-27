@@ -9,4 +9,39 @@
 		<h1>Pending: {{ usr }}</h1>
 		<h2>Some read_tweets text</h2>
 	</div>
+	<form action="" method="post">
+      <label for="company"> Select Company</label>
+      <select class="form-control" id="company" name="company">
+        <option value = "GGL">Google</option>
+        <option value = "APL">Apple</option>
+        <option value = "AMZ">Amazon</option>
+        <option value = "MIC">Microsoft</option>
+      </select>
+      <label for="userid"> Enter UserID</label>
+        <input type="text" placeholder="Username" name="userid" id = "userid">
+         <!-- <input type="password" placeholder="Password" name="password" value="{{
+          request.form.password }}"> -->
+        <input class="btn btn-default" type="submit" value="Login">
+      </form><br><br>
+      {% if posting %} 
+
+	<table>
+	  <tr>
+	    <th>Sr No.</th>
+	    <th>Tweet ID</th>
+	    <th>Tweet Text</th>
+	  </tr>
+	  
+	  	{% for i in range(mylen) %}
+	  	<tr>
+	      <td>{{i}}</td>
+	      <td>{{mylist[i][0]}}</td>
+	      <td>{{mylist[i][1]}}</td>
+	    </tr>
+	    {%endfor%}
+
+	 
+	</table>
+        
+      {% endif %}
 {% endblock %}

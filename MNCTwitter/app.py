@@ -62,13 +62,27 @@ def users():
 	return render_template("users.html", usr = user, image = image)
 
 # read_tweets endpoint
-@app.route("/read_tweets")
+# @app.route("/read_tweets")
+# def read_tweets():
+# 	global user
+# 	if not user:
+# 		return redirect(url_for("login"))
+
+# 	return render_template("read_tweets.html", usr = user, image = image)
+
+@app.route("/read_tweets", methods = ["GET", "POST"])
 def read_tweets():
 	global user
 	if not user:
 		return redirect(url_for("login"))
+	elif request.method == "GET":
+		return render_template("read_tweets.html", usr = user, image = image, posting=None)
+	else:
+		userid = request.form["userid"]
+		companyname = request.form["company"]
+		mylist = [(1, "my tweet 1"), (20, "mytweet 2")]
+		return render_template("read_tweets.html", usr = user, image = image, posting=1, mylist = mylist, mylen = len(mylist))
 
-	return render_template("read_tweets.html", usr = user, image = image)
 
 # network_analysis endpoint
 @app.route("/network_analysis")

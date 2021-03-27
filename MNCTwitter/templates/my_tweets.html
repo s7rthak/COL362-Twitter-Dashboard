@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 
+{% block style %}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+{% endblock %}
+
 {% block title %}My Tweets{% endblock %}
 
 {% block my_tweets_class %}class="active"{% endblock %}
@@ -9,4 +27,5 @@
 		<h1>Pending: {{ usr }}</h1>
 		<h2>Some my_tweet text</h2>
 	</div>
+	
 {% endblock %}
