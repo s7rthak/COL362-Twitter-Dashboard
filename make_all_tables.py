@@ -9,6 +9,7 @@ df = pandas.read_csv('Tweet.csv')
 df["report_num"] = '0'
 df["is_retweet"] = 'False'
 df["original_tweet_id"] = ''
+df['post_date'] = pandas.to_datetime(df['post_date'], unit='s')
 df.to_csv('Tweet.csv', index=False)
 
 all_users = list(df["writer"])
