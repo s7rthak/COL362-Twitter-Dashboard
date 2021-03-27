@@ -1,16 +1,16 @@
 ## ACTIONS and TRIGGERS
 
-1. `tweet(tweet_id, writer, post_date, body, comment_num, retweet_num, like_num, report_num, is_retweet, original_tweet_id) `
+1. `tweet(tweet_id, writer, post_date, body, comment_num, retweet_num, like_num, report_num, is_retweet, original_tweet_id)`
    1. Posting new tweet: `INSERT INTO`
       Triggers:
-      1. Increment `users(tweet_num)` 
+      1. Increment `users(tweet_num)`
       2. `INSERT INTO company_tweet(tweet_id, ticker_symbol)`
       3. If `is_retweet` then `UPDATE tweet(retweet_num)`
       4. If `is_retweet` then `UPDATE user(retweet_num)`
       5. `INSERT INTO tweet_hash(tweet_id...)`
    2. Deleting old tweet: `DELETE FROM`
       Triggers:
-      1. Decrements `users(tweet_num)` 
+      1. Decrements `users(tweet_num)`
       2. Those tweets that retweeted this tweet `DELETE FROM tweet(tweet_id)`
       3. `DELETE FROM company_tweet(tweet_id, ticker_symbol)`
       4. `DELETE FROM favourite(user_id, tweet_id)`

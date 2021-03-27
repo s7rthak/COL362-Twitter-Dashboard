@@ -123,7 +123,7 @@ Assumptions:
 ## TODOs
 
 - [ ] HTML: actions_page.html, tweets.html
-- [ ] Update `make_all_tables.py` as per updated format in `DB`
+- [x] Update `make_all_tables.py` as per updated format in `DB` - Done with the updates.
 - [ ] Add script for building `tweet_hash` table
 - [ ] Complete Actions and Triggers (from `Pending.db`) in `triggers.sql` and `db_build.sql`
 

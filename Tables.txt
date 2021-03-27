@@ -6,7 +6,7 @@ company(ticker_symbol, company_name)
 
 users(user_id, user_name, password, tweet_num, follower_num, comment_num, retweet_num, like_num, report_num)
 
-follower(user_id1, user_id2)  # User2 follows User1
+follower(user_id1, user_id2)  # User1 follows User2
 
 favourite(user_id, tweet_id)
 
