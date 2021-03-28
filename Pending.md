@@ -1,4 +1,4 @@
-## ACTIONS and TRIGGERS
+## ACTIONs, TRIGGERs (or RULEs) and PROCEDUREs (= TRANSACTIONs)
 
 1. `tweet(tweet_id, writer, post_date, body, comment_num, retweet_num, like_num, report_num, is_retweet, original_tweet_id)`
    1. Posting new tweet: `INSERT INTO`
@@ -67,6 +67,15 @@
       2. `UPDATE user_data(user_id, report_num)`
 9. `tweet_hash(tweet_id, hash)`
 
-## View
+## VIEWs
 
 1. `user_recommendations(user_id1, user_id2, distance, priority = -4 * distance + 6 * popularity)`
+
+## MATERIALIZED VIEWs
+
+1. `popular_tweets(tweet_id)`
+2. `popular_users(user_id)`
+
+## INDEXs
+
+1. `tweet` indexed on `writer_id`
