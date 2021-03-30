@@ -95,7 +95,7 @@ CREATE TABLE tweet_hash (
 
 	-- foreign key constraints
 	-- * company_tweet *
-		ALTER TABLE company_tweet add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id);
+		ALTER TABLE company_tweet add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id) on delete cascade;
 
 	-- * tweet *
 		ALTER TABLE tweet add constraint writer_ref foreign key (writer) references users(user_name);
@@ -118,7 +118,7 @@ CREATE TABLE tweet_hash (
 -- **** favourite ****
 	-- foreign key constraints
 	ALTER TABLE favourite add constraint user_id_ref foreign key (user_id) references users(user_id);
-	ALTER TABLE favourite add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id);
+	ALTER TABLE favourite add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id) on delete cascade;
 
 -- **** comment ****
 	-- key constraints
@@ -127,16 +127,16 @@ CREATE TABLE tweet_hash (
 
 	-- foreign key constraints
 	ALTER TABLE comment add constraint user_id_comment_ref foreign key (user_id) references users(user_id);
-	ALTER TABLE comment add constraint tweet_id_comment_ref foreign key (tweet_id) references tweet(tweet_id);
+	ALTER TABLE comment add constraint tweet_id_comment_ref foreign key (tweet_id) references tweet(tweet_id) on delete cascade;
 
 -- **** report ****
 	-- foreign key constraints
 	ALTER TABLE report add constraint user_id_ref foreign key (user_id) references users(user_id);
-	ALTER TABLE report add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id);
+	ALTER TABLE report add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id) on delete cascade;
 
 -- **** tweet_hash ****
 	-- foreign key constraints
-	ALTER TABLE tweet_hash add constraint tweet_id_tweet_hash_ref foreign key (tweet_id) references tweet(tweet_id);
+	ALTER TABLE tweet_hash add constraint tweet_id_tweet_hash_ref foreign key (tweet_id) references tweet(tweet_id) on delete cascade;
 
 \copy users(user_name, password, tweet_num, follower_num, comment_num, retweet_num, like_num, report_num) from 'Data/DB/users.csv' delimiter ',' csv header;
 \copy company from 'Data/DB/company.csv' delimiter ',' csv header;

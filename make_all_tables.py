@@ -65,9 +65,10 @@ f.close()
 
 #Write tweet_hash.csv
 def extract_hashtags(text):
-    text = text.replace("'", " ")
-    text = text.replace("#", " #")
-    text = text.replace("http", " http")
+    rep = {"'": " ", "#": " #", "http": " http"}
+    rep = dict((re.escape(k), v) for k, v in rep.items())
+    pattern = re.compile("|".join(rep.keys()))
+    text = pattern.sub(lambda m: rep[re.escape(m.group(0))], text)
     all_hashtags = list(set([re.sub(r"#+", "#", k) for k in set([re.sub(r"(\W+)$", "", j, flags = re.UNICODE) for j in set([i for i in text.split() if i.startswith("#")])])]))
     all_hashtags = [hashtag[1:] for hashtag in all_hashtags]
     return all_hashtags
