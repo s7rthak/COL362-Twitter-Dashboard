@@ -1,7 +1,7 @@
-tweet_id,ticker_symbol
-AAPL,apple
-GOOG,Google Inc
-GOOGL,Google Inc
-AMZN,Amazon.com
-TSLA,Tesla Inc
+ticker_symbol,company_name
+AAPL,Apple
+GOOG,Google
+GOOGL,Alphabet Inc
+AMZN,Amazon
+TSLA,Tesla
 MSFT,Microsoft
