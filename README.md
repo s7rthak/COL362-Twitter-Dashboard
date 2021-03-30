@@ -122,13 +122,12 @@ Assumptions:
 
 ## TODOs
 
-- [ ] HTML: actions_page.html, tweets.html
-- [x] Update `make_all_tables.py` as per updated format in `DB` - Done with the updates.
-- [ ] Add script for building `tweet_hash` table
-- [ ] Complete Actions and Triggers (from `Pending.db`) in `triggers.sql` and `db_build.sql`
+- [ ] Triggers for all INSERTS that increment numbers (Test)
+- [ ] Update make_all_tables.py
 
-## UPDATES:
+## Updates
 
-- Tables.txt: Some tables have been updated
-- CSV Files: `SERIAL` data type columns should not be in CSV files (Check updated DB_test)
-- Build files: `db_build.sql` and `db_test_build.sql` updated as per new schema
+- Remove id from (comment, tweet, user)
+- Company names
+- tweet_hash: single hashes instead of arrays
+- user: New attribute follow_num
