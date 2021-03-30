@@ -1,12 +1,14 @@
 make: db_test
 
-db: # Data/build/drop.sql Data/build/db_build.sql Data/DB/comment.csv Data/DB/company.csv Data/DB/company_tweet.csv Data/DB/favourite.csv Data/DB/follower.csv Data/DB/report.csv Data/DB/tweet.csv Data/DB/users.csv
+db:
 	sudo -u postgres psql db -f Data/build/drop.sql
-	sudo -u postgres psql db -f Data/build/db_build.sql
+	sudo -u postgres psql db -f Data/build/tables_constraints.sql
+	sudo -u postgres psql db -f Data/build/copy_db.sql
 
-db_test: # Data/build/drop.sql Data/build/db_build_test.sql Data/DB_test/comment.csv Data/DB_test/company.csv Data/DB_test/company_tweet.csv Data/DB_test/favourite.csv Data/DB_test/follower.csv Data/DB_test/report.csv Data/DB_test/tweet.csv Data/DB_test/users.csv
+db_test:
 	sudo -u postgres psql db_test -f Data/build/drop.sql
-	sudo -u postgres psql db_test -f Data/build/db_build_test.sql
+	sudo -u postgres psql db_test -f Data/build/tables_constraints.sql
+	sudo -u postgres psql db_test -f Data/build/copy_db_test.sql
 
 check_db_test:
 	sudo -u postgres psql db_test -f Data/build/check_db_test.sql
