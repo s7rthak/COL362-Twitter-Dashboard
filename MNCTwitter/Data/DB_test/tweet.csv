@@ -1,4 +1,4 @@
-writer,post_date,body,comment_num,retweet_num,like_num,report_num,is_retweet,original_tweet_id
+writer_id,post_date,body,comment_num,retweet_num,like_num,report_num,is_retweet,original_tweet_id
 1,1420070807,This is User1's #user1 Tweet No. 1,0,0,0,0,f,
 1,1420071005,This is User1's #user1 Tweet No. 2,0,0,0,0,f,
 1,1420071005,This is User1's #user1 Tweet No. 3,0,0,0,0,f,
