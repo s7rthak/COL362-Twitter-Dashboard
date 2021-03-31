@@ -124,6 +124,8 @@ Assumptions:
 
 - [ ] Triggers for all INSERTS that increment numbers (Test)
 - [ ] Update make_all_tables.py
+- [ ] Network Analysis
+- [ ] Company Analysis
 
 ## Updates
 
