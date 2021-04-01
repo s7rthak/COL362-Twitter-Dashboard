@@ -17,7 +17,7 @@ for i in range(len(tweet_id_list)):
 df["report_num"] = '0'
 df["is_retweet"] = 'False'
 df["original_tweet_id"] = ''
-df['post_date'] = pandas.to_datetime(df['post_date'], unit='s')
+# df['post_date'] = pandas.to_datetime(df['post_date'], unit='s')
 df.drop("tweet_id", axis=1, inplace=True)
 
 all_users = list(df["writer"])
