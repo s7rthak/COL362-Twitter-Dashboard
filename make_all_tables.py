@@ -6,6 +6,14 @@ import re
 df = pandas.read_csv('Tweet.csv')
 
 # rewrite Tweet.csv
+df.dropna(inplace=True)
+
+tweet_id_list = list(df["tweet_id"])
+tweet_id_table = dict()
+
+for i in range(len(tweet_id_list)):
+    tweet_id_table[tweet_id_list[i]] = i
+
 df["report_num"] = '0'
 df["is_retweet"] = 'False'
 df["original_tweet_id"] = ''
@@ -33,7 +41,7 @@ num_of_following = np.random.binomial(num_of_users, p, size=num_of_users)
 for i in range(num_of_users):
     following = np.random.binomial(num_of_users, 0.5, size=num_of_following[i])
     for j in range(num_of_following[i]):
-        f.write('\n' + str(following[j]) + ',' + str(i))
+        f.write('\n' + str(following[j] + 1) + ',' + str(i + 1))
         follower_count[following[j]] += 1
         follow_count[i] += 1
 
@@ -46,7 +54,7 @@ f.write('user_name,password,tweet_num,follower_num,follow_num,comment_num,retwee
 user_table = dict()
 user_id = 0
 for user in tweet_counter:
-    f.write('\n' + user + ',' + user + ',' + str(tweet_counter[user]) + ',' + str(follower_count[user_id]) + ',' + str(follow_count[user_id]) + ',0,0,0,0')
+    f.write('\n' + user + ',' + user + ',0,0,0,0,0,0,0')
     user_table[user] = user_id
     user_id += 1
 
@@ -90,11 +98,19 @@ for index, row in df.iterrows():
 
 f.close()
 
+# Write company_tweet.csv
+df_ct = pandas.read_csv('Company_Tweet.csv')
+df_ct.dropna(inplace=True)
+df_ct = df_ct[df_ct["tweet_id"].isin(tweet_id_list)]
+df_ct["tweet_id"] = df_ct["tweet_id"].map(tweet_id_table) + 1
+df_ct = df_ct.astype({"tweet_id": int})
+df_ct.to_csv('company_tweet.csv', index=False) 
+
 df = df.rename(columns={'writer': 'writer_id'})
-df['writer_id'] = df['writer_id'].map(user_table)
-df["writer_id"].fillna(-1, inplace=True)
+df['writer_id'] = df['writer_id'].map(user_table) + 1
+# df["writer_id"].fillna(-1, inplace=True)
 df = df.astype({"writer_id": int})
-df.to_csv('Tweet.csv', index=False)
+df.to_csv('tweet.csv', index=False)
 
 # Rewrite company.csv
 f = open('company.csv', 'w')
