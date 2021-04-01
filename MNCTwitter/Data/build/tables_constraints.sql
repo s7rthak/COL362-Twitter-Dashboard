@@ -3,7 +3,7 @@
 CREATE TABLE tweet (
 	tweet_id serial,
 	writer_id integer NOT NULL,
-	post_date integer NOT NULL, -- timestamp type: integer  4 bytes  1901-12-13 to 2038-01-18
+	post_date timestamp NOT NULL, -- timestamp type: integer  4 bytes  1901-12-13 to 2038-01-18
 	body text NOT NULL,
 	comment_num bigint NOT NULL,
 	retweet_num bigint NOT NULL,
