@@ -79,6 +79,24 @@ WHERE \
 	\
 	tweet_id = %s"
 
+get_observers_query = \
+"SELECT user_id2 FROM follower WHERE user_id1 = %s UNION \
+SELECT f.user_id FROM tweet t, favourite f WHERE t.tweet_id = f.tweet_id AND t.writer_id = %s UNION \
+SELECT c.user_id FROM tweet t, comment c WHERE t.tweet_id = c.tweet_id AND t.writer_id = %s UNION \
+SELECT r.user_id FROM tweet t, report r WHERE t.tweet_id = r.tweet_id AND t.writer_id = %s"
+
+get_recommendations_query = \
+"WITH RECURSIVE connects (u1, u2) AS \
+(SELECT user_id1, user_id2 FROM follower f WHERE user_id1 != user_id2 \
+UNION \
+SELECT connects.u1, f.user_id2 \
+FROM connects, follower f \
+WHERE f.user_id1 =connects.u2 \
+AND f.user_id2 != connects.u1) \
+SELECT connects.u2 FROM connects \
+WHERE connects.u1 = %s \
+AND connects.u2 NOT IN (SELECT user_id2 FROM follower WHERE user_id1 = %s)"
+
 add_like_query = "INSERT INTO favourite(user_id, tweet_id) VALUES(%s, %s)"
 
 delete_like_query = "DELETE FROM favourite WHERE user_id = %s AND tweet_id = %s"

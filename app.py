@@ -329,11 +329,30 @@ def tweet(tweet_id):
 	return render_template("tweet.html", usr = user_name, usr_id = user_id, image = image, tweet_id = tweet_id, tweet_info = tweet_info, user_tweet = user_tweet, liked = liked, retweeted = retweeted, reported = reported, comment_list = comment_list)
 
 # network_analysis endpoint
-@app.route("/network_analysis")
+@app.route("/network_analysis", methods = ["GET", "POST"])
 def network_analysis():
 	global user_id, user_name
 	if not user_id:
 		return redirect(url_for("login"))
+
+	if request.method == "POST":
+		
+		# Users ------
+		user_ids = []
+		
+		user_to_show = request.form["users_to_show"]
+		if user_to_show == "People who have observed you":
+			user_ids = list(get_observers_db(user_id))
+		elif user_to_show == "Users you may know":
+			user_ids = list(get_recommendations_db(user_id))
+		elif user_to_show == "Users your interests match with":
+			user_ids = list(get_users_followed_by_db(user_id))
+		
+		users_list = [(this_user_id, get_user_name_db(this_user_id)) for this_user_id in user_ids]
+		users_info = user_to_show
+		print(users_list)
+
+		return render_template("network_analysis.html", usr = user_name, usr_id = user_id, image = image, users_info = users_info, users_list = users_list, users_num = len(users_list))
 
 	return render_template("network_analysis.html", usr = user_name, usr_id = user_id, image = image)
 

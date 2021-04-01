@@ -140,6 +140,16 @@ def get_tweet_db(tweet_id):
 	cur.execute(get_tweet_query, (tweet_id,))
 	return list(map(convert_timestamp(4), cur.fetchall()))[0]
 
+def get_observers_db(user_id):
+	""" Returns user's observers for network analysis """
+	cur.execute(get_observers_query, (user_id, user_id, user_id, user_id))
+	return list(map(extract(0), cur.fetchall()))
+
+def get_recommendations_db(user_id):
+	""" Returns user's observers for network analysis """
+	cur.execute(get_recommendations_query, (user_id, user_id))
+	return list(map(extract(0), cur.fetchall()))
+
 def add_like_db(user_id, tweet_id):
 	""" Add like """
 	cur.execute(add_like_query, (user_id, tweet_id))
