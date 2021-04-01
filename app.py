@@ -39,6 +39,8 @@ def home():
 	if not user_id:
 		return redirect(url_for("login"))
 
+	# print(list(pratik_test()))
+
 	return render_template("home.html", usr = user_name, usr_id = user_id, image = image)
 
 # post_tweet endpoint
@@ -357,11 +359,22 @@ def network_analysis():
 	return render_template("network_analysis.html", usr = user_name, usr_id = user_id, image = image)
 
 # company_analysis endpoint
-@app.route("/company_analysis")
+@app.route("/company_analysis", methods = ["GET", "POST"])
 def company_analysis():
 	global user_id, user_name
 	if not user_id:
 		return redirect(url_for("login"))
+
+	if request.method == "POST":
+		companycode = request.form["companies_to_show"]
+		topfans = get_topfans_db(companycode)
+		totallikes = get_totallikes_db(companycode)
+		mosttrending = get_mosttrending_db(companycode)
+		mosttweets = get_maxtweets_db(companycode)
+
+		users_list = [(this_user_id, get_user_name_db(this_user_id)) for this_user_id in topfans]
+		
+		return render_template("company_analysis.html", usr = user_name, usr_id = user_id, image = image, users_info=companycode, users_list=users_list, users_num=len(users_list), totallikes=totallikes, mosttrending=mosttrending, mosttweets=mosttweets)
 
 	return render_template("company_analysis.html", usr = user_name, usr_id = user_id, image = image)
 

@@ -97,6 +97,39 @@ SELECT connects.u2 FROM connects \
 WHERE connects.u1 = %s \
 AND connects.u2 NOT IN (SELECT user_id2 FROM follower WHERE user_id1 = %s)"
 
+get_topfans_query = \
+"SELECT t.writer_id FROM company_tweet ct, tweet t \
+WHERE t.tweet_id = ct.tweet_id \
+AND ct.ticker_symbol = %s \
+GROUP BY t.writer_id \
+ORDER BY COUNT(*) DESC LIMIT 3"
+
+get_totallikes_query = \
+"SELECT SUM(t.like_num) FROM company_tweet ct, tweet t WHERE ct.tweet_id=t.tweet_id AND ct.ticker_symbol=%s GROUP BY ct.ticker_symbol"
+
+#get_test_query = \
+#"SELECT t.tweet_id, DATE(TO_TIMESTAMP(t.post_date)) FROM tweet t"
+
+get_maxtweets_query = \
+"SELECT DATE(TO_TIMESTAMP(t.post_date)), COUNT(*) \
+FROM tweet t, company_tweet ct \
+WHERE ct.tweet_id = t.tweet_id AND ct.ticker_symbol = %s \
+GROUP BY DATE(TO_TIMESTAMP(t.post_date)) \
+ORDER BY COUNT(*) DESC \
+LIMIT 1"
+
+get_mosttrending_query = \
+"SELECT COUNT(*) FROM \
+(SELECT DATE(TO_TIMESTAMP(t.post_date)), ct.ticker_symbol, COUNT(*), rank() OVER(PARTITION BY DATE(TO_TIMESTAMP(t.post_date)) ORDER BY COUNT(*) DESC) \
+FROM tweet t, company_tweet ct \
+WHERE ct.tweet_id = t.tweet_id \
+GROUP BY DATE(TO_TIMESTAMP(t.post_date)), ct.ticker_symbol) as temp \
+WHERE temp.rank < 2 AND temp.ticker_symbol = %s"
+
+get_test_query = \
+"SELECT t.tweet_id, DATE(TO_TIMESTAMP(t.post_date))+1 \
+FROM tweet t"
+
 add_like_query = "INSERT INTO favourite(user_id, tweet_id) VALUES(%s, %s)"
 
 delete_like_query = "DELETE FROM favourite WHERE user_id = %s AND tweet_id = %s"

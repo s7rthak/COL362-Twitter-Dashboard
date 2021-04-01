@@ -253,12 +253,30 @@ def get_users_followed_by_limit_db(user_id, limit):
 	cur.execute(get_users_followed_by_limit_query, (user_id, limit))
 	return cur.fetchall()
 
-
 def get_followers_limit_db(user_id, limit):
 	""" Returns limited user's followers of user """
 	cur.execute(get_followers_limit_query, (user_id, limit))
 	return cur.fetchall()
 
+def get_topfans_db(company_id):
+	cur.execute(get_topfans_query, (company_id, ))
+	return list(map(extract(0), cur.fetchall()))
+
+def get_totallikes_db(company_id):
+	cur.execute(get_totallikes_query, (company_id, ))
+	return cur.fetchone()[0]
+
+def get_mosttrending_db(company_id):
+	cur.execute(get_mosttrending_query, (company_id, ))
+	return cur.fetchone()[0]
+
+def get_maxtweets_db(company_id):
+	cur.execute(get_maxtweets_query, (company_id, ))
+	return list(cur.fetchall())
+
+# def pratik_test():
+# 	cur.execute(get_test_query)
+# 	return cur.fetchall()
 
 
 def check_db():
