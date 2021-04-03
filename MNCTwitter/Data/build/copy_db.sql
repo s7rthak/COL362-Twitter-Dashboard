@@ -7,3 +7,4 @@
 \copy favourite from 'Data/DB/favourite.csv' delimiter ',' csv header;
 \copy comment(user_id, tweet_id, comment_date, body) from 'Data/DB/comment.csv' delimiter ',' csv header;
 \copy report from 'Data/DB/report.csv' delimiter ',' csv header;
+\copy tweet_hash from 'Data/DB/tweet_hash.csv' delimiter ',' csv header;
