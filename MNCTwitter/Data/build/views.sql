@@ -43,15 +43,6 @@ GROUP BY DATE(TO_TIMESTAMP(t.post_date)), ct.ticker_symbol;
 -- FROM all_streaks
 -- GROUP BY ticker_symbol
 
--- SELECT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id, ph.hash, ph.tweet_num
--- FROM tweet, users, tweet_hash th, popular_hashes ph
--- WHERE
--- 	writer_id = user_id AND
--- 	tweet.tweet_id = th.tweet_id AND
--- 	th.hash = ph.hash
--- ORDER BY ph.tweet_num DESC, ph.hash ASC, post_date DESC
--- LIMIT 100;
-
 
 CREATE MATERIALIZED VIEW popular_users(user_id, user_name) AS
 SELECT user_id, user_name
