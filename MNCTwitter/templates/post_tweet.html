@@ -1,12 +1,80 @@
 {% extends "base.html" %}
 
 {% block title %}Post Tweet{% endblock %}
-
+ 
 {% block post_tweet_class %}class="active"{% endblock %}
 
 {% block content %}
-	<div class="main">
-		<h1>Pending: {{ usr }}</h1>
-		<h2>Some post_tweet text</h2>
+	<div class="login-page">
+		<div>
+				
+			<h1>Create post</h1>
+
+			<form action="" target="_self" id="bootstrapForm" method="POST">
+
+				<!-- Field type: "checkboxes" id: "companies" -->
+				<fieldset>
+					<legend for="companies_to_show">Select Companies</legend>
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="ALL" checked>
+								All
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="AAPL" >
+								Apple
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="GOOG" >
+								Google
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="GOOGL" >
+								Alphabet  Inc
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="AMZN" >
+								Amazon
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="TSLA" >
+								Tesla
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="MSFT" >
+								Microsoft
+							</label>
+						</div>
+					</div>
+				</fieldset>
+
+				<h2>Body</h2>
+
+				<div class="form-group">
+					<textarea placeholder="write the content of your tweet here" name="body" cols="60" rows="10"></textarea>
+				</div>
+
+				<button>Create</button>
+				
+			</form>
+
+			{% if error %}
+				<p class="error"><strong>Error:</strong> {{ error }}</p>
+			{% endif %}
+			
+		</div>
 	</div>
 {% endblock %}

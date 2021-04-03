@@ -1,36 +1,187 @@
-<html>
-	<head>
-		<title>MNC Twitter - login page</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="static/bootstrap.rtl.css" rel="stylesheet" media="screen">
-	</head>
-	<body>
-		<div class="container">
-			<h1>Please login</h1>
-			<br>
-			<form action="" method="post">
-				<input type="text" placeholder="Username" name="username" value="{{request.form.username }}">
-				<input type="password" placeholder="Password" name="password" value="{{request.form.password }}">
-				<input class="btn btn-default" type="submit" value="Login">
-			</form>
-			{% if error %} <!-- If there is a non-None error -->
-				<p class="error"><strong>Error:</strong> {{ error }}</p> <!-- Error text is displayed along with the content -->
-			{% endif %}
-		</div>
-		<h2>OR</h2>
-		<div class="container">
-			<h1>Create a new account</h1>
-			<br>
-			<form action="" method="post">
-				<input type="text" placeholder="Select Username" name="username" value="{{request.form.username }}">
-				<input type="password" placeholder="Select Password" name="password" value="{{request.form.password }}">
-				<input type="password" placeholder="Rewrite Password" name="repassword" value="{{request.form.repassword }}">
-				<input class="btn btn-default" type="submit" value="Sign Up">
-			</form>
-			{% if error %} <!-- If there is a non-None error -->
-				<p class="error"><strong>Error:</strong> {{ error }}</p> <!-- Error text is displayed along with the content -->
-			{% endif %}
-			<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-		</div>
-	</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Template{% endblock %}
+
+{% block style %}
+blockquote.twitter-tweet {
+	display: inline-block;
+	font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 16px;
+	border-color: #eee #ddd #bbb;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	margin: 10px 5px;
+	padding: 0 16px 16px 16px;
+	max-width: 468px;
+}
+
+blockquote.twitter-tweet p {
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 20px;
+}
+
+blockquote.twitter-tweet a {
+	color: inherit;
+	font-weight: normal;
+	text-decoration: none;
+	outline: 0 none;
+}
+
+blockquote.twitter-tweet a:hover,
+blockquote.twitter-tweet a:focus {
+	text-decoration: underline;
+}
+{% endblock %}
+
+{% block content %}
+
+<div class="login-page">
+<blockquote class="twitter-tweet" tw-align-center data-lang="en"><p lang="en" dir="ltr">Let us know! 👂<br>What type of content would you like to see from us this year?</p>&mdash; HubSpot (@HubSpot) <a>January 16, 2019</a></blockquote>
+	<div>
+		<h1>Something</h1>
+		<form action=""
+		      target="_self"
+		      id="bootstrapForm"
+		      method="POST">
+		    <fieldset>
+		        <h2>Read Tweets<br><small></small></h2>
+		    </fieldset>
+
+
+		    <!-- Field type: "checkboxes" id: "1942552050" -->
+		    <fieldset>
+		        <legend for="1942552050">Select Companies</legend>
+		        <div class="form-group">
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.1883269965" value="Apple" >
+		                    Apple
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.1883269965" value="Google" >
+		                    Google
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.1883269965" value="Alphabet  Inc" >
+		                    Alphabet  Inc
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.1883269965" value="Amazon" >
+		                    Amazon
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.1883269965" value="Tesla" >
+		                    Tesla
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.1883269965" value="Microsoft" >
+		                    Microsoft
+		                </label>
+		            </div>
+		        </div>
+		    </fieldset>
+
+
+		    <!-- Field type: "checkboxes" id: "2028910864" -->
+		    <fieldset>
+		        <legend for="2028910864">Select Users</legend>
+		        <div class="form-group">
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.798537823" value="All" >
+		                    All
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.798537823" value="Popular users" >
+		                    Popular users
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.798537823" value="Users I follow" >
+		                    Users I follow
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.798537823" value="Me" >
+		                    Me
+		                </label>
+		            </div>
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" name="entry.798537823" value="__other_option__" >
+		                </label>
+		                <input type="text" name="entry.798537823.other_option_response" placeholder="custom value">
+		            </div>
+		        </div>
+		    </fieldset>
+
+
+		    <!-- Field type: "dropdown" id: "735047663" -->
+		    <fieldset>
+		        <legend for="735047663">Sort tweets by</legend>
+		        <div class="form-group">
+		            <select id="735047663" name="entry.1233387812" class="form-control">
+		                <option value=""></option>
+		                <option value="Most recent first">Most recent first</option>
+		                <option value="Most popular first">Most popular first</option>
+		                <option value="Posted by popular people first">Posted by popular people first</option>
+		            </select>
+		        </div>
+		    </fieldset>
+
+		    <input type="hidden" name="fvv" value="1">
+		    <input type="hidden" name="fbzx" value="7133208475786260545">
+		    <!--
+		        CAVEAT: In multipages (multisection) forms, *pageHistory* field tells to google what sections we've currently completed.
+		        This usually starts as "0" for the first page, then "0,1" in the second page... up to "0,1,2..N" in n-th page.
+		        Keep this in mind if you plan to change this code to recreate any sort of multipage-feature in your exported form.
+		        We're setting this to the total number of pages in this form because we're sending all fields from all the section together.
+		    -->
+		    <input type="hidden" name="pageHistory" value="0">
+
+		    <input class="btn btn-primary" type="submit" value="Show Tweets">
+		</form>
+
+			<br><br>
+	      {% if posting %} 
+
+		<table>
+		  <tr>
+		    <th>Sr No.</th>
+		    <th>Tweet ID</th>
+		    <th>Tweet Text</th>
+		  </tr>
+		  
+		  	{% for i in range(mylen) %}
+		  	<tr>
+		      <td><a href="/">{{i}}</a></td>
+		      <td>{{mylist[i][0]}}</td>
+		      <td>{{mylist[i][1]}}</td>
+		    </tr>
+		    {%endfor%}
+		 
+		</table>
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}

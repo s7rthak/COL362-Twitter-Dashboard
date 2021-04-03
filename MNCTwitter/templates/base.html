@@ -1,10 +1,109 @@
 <html>
 <head>
-	<title>{{ usr }} {% block title %} {% endblock %} - MNCTwitter</title>
+	<title>{{ usr }}: {% block title %} {% endblock %} - MNCTwitter</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
-		body {margin:0;}
+		@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+		.login-page {
+			width: 500px;
+			padding: 8% 0 0;
+			margin: auto;
+		}
+		.form {
+			position: relative;
+			z-index: 1;
+			background: #FFFFFF;
+			max-width: 360px;
+			margin: 0 auto 100px;
+			padding: 45px;
+			text-align: center;
+			box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+		}
+		.form input {
+			font-family: "Roboto", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 100%;
+			border: 0;
+			margin: 0 0 15px;
+			padding: 15px;
+			box-sizing: border-box;
+			font-size: 14px;
+		}
+		.form textarea {
+			font-family: "Roboto", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 100%;
+			border: 0;
+			margin: 0 0 15px;
+			padding: 15px;
+			box-sizing: border-box;
+			font-size: 14px;
+		}
+		.form button {
+			font-family: "Roboto", sans-serif;
+			text-transform: uppercase;
+			outline: 0;
+			background: #4CAF50;
+			width: 100%;
+			border: 0;
+			padding: 15px;
+			color: #FFFFFF;
+			font-size: 14px;
+			-webkit-transition: all 0.3 ease;
+			transition: all 0.3 ease;
+			cursor: pointer;
+		}
+		.form button:hover,.form button:active,.form button:focus {
+			background: #43A047;
+		}
+		.form .message {
+			margin: 15px 0 0;
+			color: #b3b3b3;
+			font-size: 12px;
+		}
+		.form .message a {
+			color: #4CAF50;
+			text-decoration: none;
+		}
+		.form .register-form {
+			display: none;
+		}
+		.container {
+			position: relative;
+			z-index: 1;
+			max-width: 300px;
+			margin: 0 auto;
+		}
+		.container:before, .container:after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+		.container .info {
+			margin: 50px auto;
+			text-align: center;
+		}
+		.container .info h1 {
+			margin: 0 0 15px;
+			padding: 0;
+			font-size: 36px;
+			font-weight: 300;
+			color: #1a1a1a;
+		}
+		.container .info span {
+			color: #4d4d4d;
+			font-size: 12px;
+		}
+		.container .info span a {
+			color: #000000;
+			text-decoration: none;
+		}
+		.container .info span .fa {
+			color: #EF3B3A;
+		}
 		body {
 			background: #ffffff; /* fallback for old browsers */
 			background: -webkit-linear-gradient(right, #ffffff, #99ccff);
@@ -15,6 +114,7 @@
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;      
 		}
+		body {margin:0;}
 
 		.navbar {
 			overflow: hidden;
@@ -46,8 +146,8 @@
 		}
 
 		.navbar a.active {
-		  background-color: #4CAF50;
-		  color: white;
+			background-color: #4CAF50;
+			color: white;
 		}
 
 		.navbar a.user {
@@ -55,8 +155,71 @@
 		  color: black;
 		}
 
+		blockquote.twitter-tweet {
+			display: inline-block;
+			font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+			font-size: 12px;
+			font-weight: bold;
+			line-height: 16px;
+			background-color: #ffffff;
+			border-color: #000000; /*#eee #ddd #bbb;*/
+			border-radius: 5px;
+			border-style: solid;
+			border-width: 1px;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+			margin: 10px 5px;
+			padding: 0 16px 16px 16px;
+			width: 468px;
+			/*max-width: 468px;*/
+		}
+
+		blockquote.twitter-tweet p {
+			font-size: 16px;
+			font-weight: normal;
+			line-height: 20px;
+		}
+
+		blockquote.twitter-tweet a {
+			color: inherit;
+			font-weight: normal;
+			text-decoration: none;
+			outline: 0 none;
+		}
+
+		blockquote.twitter-user {
+			display: inline-block;
+			font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+			font-size: 12px;
+			font-weight: bold;
+			line-height: 16px;
+			background-color: #ffffff;
+			border-color: #000000; /*#eee #ddd #bbb;*/
+			border-radius: 5px;
+			border-style: solid;
+			border-width: 1px;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+			margin: 10px 5px;
+			padding: 0 16px 16px 16px;
+			/*width: 468px;*/
+			max-width: 468px;
+		}
+
+		blockquote.twitter-user p {
+			font-size: 16px;
+			font-weight: normal;
+			line-height: 20px;
+		}
+
+		blockquote.twitter-user a {
+			color: inherit;
+			font-weight: normal;
+			text-decoration: none;
+			outline: 0 none;
+		}
+
 		{% block style %} {% endblock %}
 	</style>
+	{% block head %} {% endblock %}
 </head>
 <body>
 
@@ -71,7 +234,7 @@
 		<a {% block company_analysis_class %} class="not-active" {% endblock %} href="/company_analysis"><img src={{ image["company_analysis"] }} alt="company_analysis" width="25cm" style="vertical-align:middle"> Company Analysis</a>
 		<a {% block account_class %} class="not-active" {% endblock %} href="/account"><img src={{ image["account"] }} alt="account" width="25cm" style="vertical-align:middle"> Account Settings</a>
 		<a {% block logout_class %} class="not-active" {% endblock %} href="/logout"><img src={{ image["logout"] }} alt="logout" width="25cm" style="vertical-align:middle"> logout</a>
-		<a class="user" href="/"><img src={{ image["usr"] }} alt="logo" width="25cm" style="vertical-align:middle"> {{ usr }}</a>
+		<a {% block user_class %} class="user" {% endblock %} href="/user:{{ usr_id }}"><img src={{ image["usr"] }} alt="logo" width="25cm" style="vertical-align:middle"> {{ usr }}</a>
 	</div>
 
 	

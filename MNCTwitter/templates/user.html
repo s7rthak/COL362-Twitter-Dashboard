@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}User {{ user_info[1] }}{% endblock %}
+
+
+{% block users_class %}
+	{% if user_page %}
+		class="not-active"
+	{% else %}
+		class="active"
+	{% endif %}
+{% endblock %}
+
+{% block user_class %}
+	{% if user_page %}
+		class="active"
+	{% else %}
+		class="user"
+	{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<div class="login-page">
+
+	<h1>User: {{ user_info[1] }}</h1>
+
+	{% if is_popular %}
+		<h4>{{ user_info[1] }} is a popular user.</h4>
+	{% endif %}
+	
+	<form action="" method ="post">
+		{% if user_page %}
+			<button type="submit" name="ACCOUNT SETTINGS" value="ACCOUNT SETTINGS">ACCOUNT SETTINGS</button>
+			<p></p>
+		{% else %}
+			{% if user_follows_user_page %}
+				<button type="submit" name="UNFOLLOW" value="UNFOLLOW">UNFOLLOW</button>
+			{% else %}
+				<button type="submit" name="FOLLOW" value="FOLLOW">FOLLOW</button>
+			{% endif %}
+		{% endif %}
+	</form>
+
+	<fieldset>
+	<h3>{{ user_info[1] }}'s has {{ user_info[8] }} total likes.</h3>
+	<h3>{{ user_info[1] }}'s has {{ user_info[7] }} total retweets.</h3>
+	<h3>{{ user_info[1] }}'s has {{ user_info[9] }} total reports.</h3>
+	</fieldset>
+
+	<p></p>
+
+	<div>
+	{% if not user_page %}
+
+		<fieldset>
+			<h3>Both you and {{ user_info[1] }} follow {{ mutual_info["common_follow_num"] }} users including:</h3>
+			{% for common_follow in mutual_info["common_follow_list"] %}
+				<blockquote class="twitter-user" tw-align-center data-lang="en">
+					<p></p>
+					<a href="/user:{{ common_follow[0] }}" style="color:red"><b>&mdash; @{{ common_follow[1] }}</b></a>
+				</blockquote>
+			{% endfor %}
+
+			<form action="" method ="post">
+			<button type="submit" name="SEE ALL COMMON FOLLOWS" value="SEE ALL COMMON FOLLOWS">SEE ALL MUTUAL FOLLOWS</button>
+			</form>
+		</fieldset>
+
+		<p></p>
+
+		<fieldset>
+			<h3>{{ mutual_info["common_follower_num"] }} users follow both you and {{ user_info[1] }}:</h3>
+			{% for common_follower in mutual_info["common_follower_list"] %}
+				<blockquote class="twitter-user" tw-align-center data-lang="en">
+					<p></p>
+					<a href="/user:{{ common_follower[0] }}" style="color:red"><b>&mdash; @{{ common_follower[1] }}</b></a>
+				</blockquote>
+			{% endfor %}
+
+			<form action="" method ="post">
+			<button type="submit" name="SEE ALL MUTUAL FOLLOWERS" value="SEE ALL MUTUAL FOLLOWERS">SEE ALL MUTUAL FOLLOWERS</button>
+			</form>
+		</fieldset>
+
+		<p></p>
+	{% endif %}
+		<fieldset>
+			<h3>{{ user_info[1] }} follows {{ user_info[5] }} users including:</h3>
+			{% for follow in follow_list %}
+				<blockquote class="twitter-user" tw-align-center data-lang="en">
+					<p></p>
+					<a href="/user:{{ follow[0] }}" style="color:red"><b>&mdash; @{{ follow[1] }}</b></a>
+				</blockquote>
+			{% endfor %}
+
+			<form action="" method ="post">
+			<button type="submit" name="SEE ALL FOLLOWS" value="SEE ALL FOLLOWS">SEE ALL USERS {{ user_info[1] }} FOLLOWS</button>
+			</form>
+		</fieldset>
+
+		<p></p>
+
+		<fieldset>
+			<h3>{{ user_info[1] }} has {{ user_info[4] }} followers including:</h3>
+			{% for follower in follower_list %}
+				<blockquote class="twitter-user" tw-align-center data-lang="en">
+					<p></p>
+					<a href="/user:{{ follower[0] }}" style="color:red"><b>&mdash; @{{ follower[1] }}</b></a>
+				</blockquote>
+			{% endfor %}
+
+			<form action="" method ="post">
+				<button type="submit" name="SEE ALL FOLLOWERS" value="SEE ALL FOLLOWERS">SEE ALL FOLLOWERS</button>
+			</form>
+		</fieldset>
+
+		<h3>{{ user_info[1] }}'s tweets ({{ user_info[3] }} tweets)</h3>
+
+		{% for i in range(tweets_num) %}
+			<blockquote class="twitter-tweet" tw-align-center data-lang="en">
+				<p lang="en" dir="ltr">
+					{{ user_tweets[i][3] }}
+				</p>
+				<b>&mdash; @{{ user_info[1] }}</b>
+				<a href="/tweet:{{ user_tweets[i][0] }}" style="color:blue">{{ user_tweets[i][4] }}</a>
+				{% if user_tweets[i][5] %}
+					<a href="/tweet: {{ user_tweets[i][6] }}" style="color:grey"><i>Retweeted: See original tweet</i></a>
+				{% endif %}
+			</blockquote>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

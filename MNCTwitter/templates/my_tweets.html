@@ -1,31 +1,149 @@
 {% extends "base.html" %}
 
-{% block style %}
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-{% endblock %}
-
 {% block title %}My Tweets{% endblock %}
 
 {% block my_tweets_class %}class="active"{% endblock %}
 
 {% block content %}
-	<div class="main">
-		<h1>Pending: {{ usr }}</h1>
-		<h2>Some my_tweet text</h2>
+<div class="login-page">
+	<div>
+
+		{% if tweets_info %}
+
+			<h1> Your Tweets </h1>
+
+			<h2>Filters:</h2>
+
+			{% for info in tweets_info %}
+				<p><b>{{ info[0] }}</b>{{ info[1] }}</p>
+			{%endfor%}
+
+
+			<button onclick="document.location='/read_tweets'">RESET FILTERS</button>
+
+			<p></p>
+
+			<h3>For more actions click on date/time of any tweet</h3>
+			<h3>For more info about the writer click on writer of any tweet</h3>
+
+			{% for i in range(tweets_num) %}
+				<blockquote class="twitter-tweet" tw-align-center data-lang="en">
+					<p lang="en" dir="ltr">
+						{{ tweets_list[i][3] }}
+					</p>
+					<a href="/user:{{ tweets_list[i][1] }}" style="color:red"><b>&mdash; @{{ tweets_list[i][2] }}</b></a>
+					<a href="/tweet:{{ tweets_list[i][0] }}" style="color:blue">{{ tweets_list[i][4] }}</a>
+					{% if tweets_list[i][5] %}
+						<a href="/tweet: {{ tweets_list[i][6] }}" style="color:grey"><i>Retweeted: See original tweet</i></a>
+					{% endif %}
+				</blockquote>
+			{% endfor %}
+
+		{% else %}
+
+			<h1>Select which tweets to read</h1>
+
+			<form action="" target="_self" id="bootstrapForm" method="POST">
+
+				<!-- Field type: "checkboxes" id: "companies" -->
+				<fieldset>
+					<legend for="companies_to_show">Select Companies</legend>
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="ALL" checked>
+								All
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="AAPL" >
+								Apple
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="GOOG" >
+								Google
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="GOOGL" >
+								Alphabet  Inc
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="AMZN" >
+								Amazon
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="TSLA" >
+								Tesla
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="companies_to_show" value="MSFT" >
+								Microsoft
+							</label>
+						</div>
+					</div>
+				</fieldset>
+
+				<!-- Field type: "checkboxes" id: "users_to_show" -->
+				<fieldset>
+					<legend for="hashes">Only Specific Topics (Hashtags)</legend>
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="include_hashes" value="include_hashes" >
+							</label>
+							<input type="text" name="hashes" placeholder="Add specific topics (Space Separated)">
+						</div>
+					</div>
+				</fieldset>
+
+				<!-- Field type: "dropdown" id: "time" -->
+				<fieldset>
+					<legend for="time">Time Restrictions</legend>
+					<div class="form-group">
+						<select id="time" name="time" class="form-control">
+							<option value="All time">All time</option>
+							<option value="Past five years">Past five years</option>
+							<option value="Past two years">Past two years</option>
+							<option value="Past year">Past year</option>
+							<option value="Past six monthes">Past six monthes</option>
+							<option value="Past day">Past day</option>
+							<option value="Past hour">Past hour</option>
+						</select>
+					</div>
+				</fieldset>
+
+				<!-- Field type: "dropdown" id: "order" -->
+				<fieldset>
+					<legend for="order">Sort tweets by</legend>
+					<div class="form-group">
+						<select id="order" name="order" class="form-control">
+							<option value="Most recent first">Most recent first</option>
+							<option value="Most liked first">Most liked first</option>
+							<option value="Most retweeted first">Most retweeted first</option>
+							<option value="Most reported first">Most reported first</option>
+							<option value="Most commented on first">Most commented on first</option>
+						</select>
+					</div>
+				</fieldset>
+
+				<button>Show Tweets</button>
+			</form>
+
+		{% endif %} 
+
+		 
 	</div>
-	
+</div>
+
 {% endblock %}

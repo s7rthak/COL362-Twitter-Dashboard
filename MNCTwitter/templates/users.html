@@ -5,8 +5,89 @@
 {% block users_class %}class="active"{% endblock %}
 
 {% block content %}
-	<div class="main">
-		<h1>Pending: {{ usr }}</h1>
-		<h2>Some users text</h2>
+<div class="login-page">
+	<div>
+		{% if users_info %}
+
+			<h1> Users </h1>
+
+			<h2>Filters:</h2>
+
+			<p><b>Showing: </b>{{ users_info }}</p>
+
+
+			<form action="" method ="post">
+				<button type="submit" name="RESET" value="RESET">RESET</button>
+			</form>
+			<!-- <button onclick="document.location='/users'">RESET FILTERS</button> -->
+
+			<p></p>
+
+			<h3>For more actions and information about the user click on the username</h3>
+
+			{% for i in range(users_num) %}
+				<blockquote class="twitter-user" tw-align-center data-lang="en">
+					<p></p>
+					<a href="/user:{{ users_list[i][0] }}" style="color:red"><b>&mdash; @{{ users_list[i][1] }}</b></a>
+				</blockquote>
+			{% endfor %}
+
+		{% else %}
+
+			<h1>Select which users to see</h1>
+
+			<form action="" target="_self" id="bootstrapForm" method="POST">
+
+				<!-- Field type: "checkboxes" id: "users_to_show" -->
+				<fieldset>
+					<legend for="users_to_show">Select Users</legend>
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="users_to_show" value="All" checked>
+								All
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="users_to_show" value="Popular users" >
+								Popular users
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="users_to_show" value="Users I follow" >
+								Users I follow
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="users_to_show" value="My followers" >
+								My followers
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="users_to_show" value="Me" >
+								Me
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="users_to_show" value="__other_option__" >
+							</label>
+							<input type="text" name="users_to_show.others" placeholder="Add space separated keywords to match users">
+						</div>
+					</div>
+				</fieldset>
+
+				<button>Show Users</button>
+			</form>
+
+		{% endif %} 
+
+		 
 	</div>
+</div>
+
 {% endblock %}

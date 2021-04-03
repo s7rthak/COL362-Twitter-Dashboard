@@ -5,8 +5,56 @@
 {% block account_class %}class="active"{% endblock %}
 
 {% block content %}
-	<div class="main">
-		<h1>Pending: {{ usr }}</h1>
-		<h2>Some account text</h2>
+	<div class="login-page">
+		<h1>Account Settings: {{ usr }}</h1>
+
+		<form action="" id="bootstrapform" method ="post">
+			<fieldset>
+				<legend for="change_username">Change username</legend>
+				<div class="form-group">
+					<input type="text" placeholder="New Username" name="new_user_name" value="{{ request.form.new_user_name }}">
+					<p></p>
+					<input type="password" placeholder="Password" name="password" value="{{ request.form.password }}">
+					<p></p>
+					<button type="submit" name="CHANGE USERNAME" value="CHANGE USERNAME">CHANGE USERNAME</button>
+				</div>
+			</fieldset>
+			{% if error %}
+				<p class="error"><strong>Error:</strong> {{ error }}</p>
+			{% endif %}
+		</form>
+
+		<form action="" id="bootstrapform" method ="post">
+			<fieldset>
+				<legend for="companies_to_show">Change password</legend>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="password" value="{{ request.form.password }}">
+					<p></p>
+					<input type="password" placeholder="New password" name="new_password" value="{{ request.form.newpassword }}">
+					<p></p>
+					<input type="password" placeholder="Rewrite new password" name="re_new_password" value="{{ request.form.renewpassword }}">
+					<p></p>
+					<button type="submit" name="CHANGE PASSWORD" value="CHANGE PASSWORD">CHANGE PASSWORD</button>
+				</div>
+			</fieldset>
+			{% if error1 %} <!-- If there is a non-None error -->
+				<p class="error"><strong>Error:</strong> {{ error1 }}</p> <!-- Error text is displayed along with the content -->
+			{% endif %}
+		</form>
+
+		<form action="" id="bootstrapform" method ="post">
+			<fieldset>
+				<legend for="delete_account">Delete Account</legend>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="password" value="{{ request.form.password }}">
+					<p></p>
+					<button type="submit" name="DEL ACCOUNT" value="DEL ACCOUNT">DELETE ACCOUNT</button>
+				</div>
+			</fieldset>
+			{% if error2 %}
+				<p class="error"><strong>Error:</strong> {{ error2 }}</p>
+			{% endif %}
+		</form>
+
 	</div>
 {% endblock %}
