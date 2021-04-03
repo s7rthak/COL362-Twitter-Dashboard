@@ -15,3 +15,14 @@ comment(comment_id, user_id, tweet_id, comment_date, body)
 report(user_id, tweet_id) # If num_reports == 100 then we delete the tweet: TRIGGER
 
 tweet_hash(tweet_id, hash)
+
+#### Views ####
+company_tweet_stats(day, ticker_symbol, tweet_num, rank)
+
+streaks(ticker_symbol, start_date, end_date, length)
+
+popular_users(user_id, user_name)
+
+popular_tweets(tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id)
+
+popular_hashes_tweets(tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id, hash, tweet_num)
