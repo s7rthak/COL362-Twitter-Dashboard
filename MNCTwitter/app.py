@@ -422,7 +422,7 @@ def network_analysis():
 		elif user_to_show == "Users you may know":
 			user_ids = list(get_recommendations_db(user_id))
 		elif user_to_show == "Users your interests match with":
-			user_ids = list(get_users_followed_by_db(user_id))
+			user_ids = list(get_matching_db(user_id))
 		
 		users_list = [(this_user_id, get_user_name_db(this_user_id)) for this_user_id in user_ids]
 		users_info = user_to_show
@@ -443,9 +443,10 @@ def company_analysis():
 		totallikes = get_totallikes_db(companycode)
 		mosttrending = get_mosttrending_db(companycode)
 		mosttweets = get_maxtweets_db(companycode)
+		longest_streak = get_longest_streak_db(companycode)
 		users_list = [(this_user_id, get_user_name_db(this_user_id)) for this_user_id in topfans]
 		
-		return render_template("company_analysis.html", usr = user_name, usr_id = user_id, image = image, users_info=get_company_name_db(companycode), users_list=users_list, users_num=len(users_list), totallikes=totallikes, mosttrending=mosttrending, mosttweets=mosttweets)
+		return render_template("company_analysis.html", usr = user_name, usr_id = user_id, image = image, users_info=get_company_name_db(companycode), users_list=users_list, users_num=len(users_list), totallikes=totallikes, mosttrending=mosttrending, mosttweets=mosttweets, longest_streak = longest_streak)
 	return render_template("company_analysis.html", usr = user_name, usr_id = user_id, image = image)
 
 # account endpoint

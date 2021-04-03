@@ -1,3 +1,4 @@
+\timing
 \copy users(user_name, password, tweet_num, follower_num, follow_num, comment_num, retweet_num, like_num, report_num) from 'Data/DB_test/users.csv' delimiter ',' csv header;
 \copy company from 'Data/DB_test/company.csv' delimiter ',' csv header;
 \copy tweet(writer_id, post_date, body, comment_num, retweet_num, like_num, report_num, is_retweet, original_tweet_id)  from 'Data/DB_test/tweet.csv' delimiter ',' csv header;

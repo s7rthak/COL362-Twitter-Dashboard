@@ -151,10 +151,44 @@ SELECT f.user_id FROM tweet t, favourite f WHERE t.tweet_id = f.tweet_id AND t.w
 SELECT c.user_id FROM tweet t, comment c WHERE t.tweet_id = c.tweet_id AND t.writer_id = %s UNION \
 SELECT r.user_id FROM tweet t, report r WHERE t.tweet_id = r.tweet_id AND t.writer_id = %s"
 
+get_matching_query = \
+"WITH RECURSIVE connects(recommendation, distance) AS  \
+( \
+	SELECT user_id1, 1 \
+	FROM follower \
+	WHERE user_id2 = %s \
+ \
+	UNION \
+ \
+	SELECT user_id1, distance + 1 \
+	FROM connects, follower \
+	WHERE distance < 4 AND user_id2 = recommendation \
+	AND user_id1 <> %s \
+), \
+our_user_follows AS (SELECT user_id1 FROM follower WHERE user_id2 = %s), \
+our_user_follow_num AS (SELECT CAST(COUNT(*) AS FLOAT) FROM our_user_follows) \
+SELECT DISTINCT recommendation, \
+	(SELECT COUNT(*) FROM follower WHERE user_id2 = recommendation AND user_id1 IN (SELECT * FROM our_user_follows)) / (SELECT * FROM our_user_follow_num) AS match \
+FROM connects \
+WHERE (SELECT COUNT(*) FROM follower WHERE user_id2 = recommendation AND user_id1 IN (SELECT * FROM our_user_follows)) / (SELECT * FROM our_user_follow_num) > 0 \
+ORDER BY (SELECT COUNT(*) FROM follower WHERE user_id2 = recommendation AND user_id1 IN (SELECT * FROM our_user_follows)) / (SELECT * FROM our_user_follow_num) \
+LIMIT 10"
+
 get_recommendations_query = \
-"SELECT recommendation \
-FROM recommendations \
-WHERE u = %s"
+"WITH RECURSIVE connects(recommendation, distance) AS  \
+( \
+	SELECT user_id1, 1 \
+	FROM follower \
+	WHERE user_id2 = %s \
+ \
+	UNION \
+ \
+	SELECT user_id1, distance + 1 \
+	FROM connects, follower \
+	WHERE distance < 3 AND user_id2 = recommendation \
+	AND user_id1 <> %s \
+) \
+SELECT DISTINCT recommendation from connects GROUP BY recommendation HAVING MIN(distance) > 1"
 
 get_topfans_query = \
 "SELECT t.writer_id \
@@ -172,19 +206,23 @@ WHERE ct.tweet_id=t.tweet_id AND ct.ticker_symbol=%s \
 GROUP BY ct.ticker_symbol"
 
 get_maxtweets_query = \
-"SELECT day, tweet_num \
-FROM company_tweet_stats \
-WHERE ticker_symbol = %s \
-ORDER BY tweet_num LIMIT 1"
+"SELECT day, tweet_num FROM \
+( \
+	SELECT day, tweet_num, rank() OVER(PARTITION BY ticker_symbol ORDER BY tweet_num DESC) \
+	FROM company_tweet_stats \
+	WHERE ticker_symbol = %s \
+) rankfilter \
+WHERE rank = 1"
 
 get_mosttrending_query = \
 "SELECT COUNT(*) FROM \
 company_tweet_stats \
-WHERE rank < 2 AND ticker_symbol = %s"
+WHERE rank = 1 AND ticker_symbol = %s"
 
-# get_longest_streak_query = \
-# " \
-# "
+get_longest_streak_query = \
+"SELECT start_date, end_date, length \
+FROM streaks \
+WHERE ticker_symbol = %s"
 
 get_hash_tweets_query = "SELECT * FROM popular_hashes_tweets WHERE hash = %s"
 

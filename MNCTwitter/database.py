@@ -336,9 +336,14 @@ def get_observers_db(user_id):
 	cur.execute(get_observers_query, (user_id, user_id, user_id, user_id))
 	return list(map(extract(0), cur.fetchall()))
 
+def get_matching_db(user_id):
+	""" Returns users with whom user_id's interests match """
+	cur.execute(get_matching_query, (user_id, user_id, user_id))
+	return list(map(extract(0), cur.fetchall()))
+
 def get_recommendations_db(user_id):
-	""" Returns user's observers for network analysis """
-	cur.execute(get_recommendations_query, (user_id,))
+	""" Returns user's close users for network analysis """
+	cur.execute(get_recommendations_query, (user_id, user_id))
 	return list(map(extract(0), cur.fetchall()))
 
 def get_topfans_db(company_id):
@@ -352,6 +357,10 @@ def get_totallikes_db(company_id):
 def get_mosttrending_db(company_id):
 	cur.execute(get_mosttrending_query, (company_id, ))
 	return cur.fetchone()[0]
+
+def get_longest_streak_db(company_id):
+	cur.execute(get_longest_streak_query, (company_id, ))
+	return cur.fetchone()
 
 def get_maxtweets_db(company_id):
 	cur.execute(get_maxtweets_query, (company_id, ))

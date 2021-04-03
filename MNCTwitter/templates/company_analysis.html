@@ -24,7 +24,7 @@
 
 			<fieldset>
 			<h2>Top fans</h2>
-			<h4>For more actions and information about the user click on the username</h4>
+			<small>For more actions and information about the user click on the username</small>
 
 			{% for i in range(users_num) %}
 				<blockquote class="twitter-user" tw-align-center data-lang="en">
@@ -38,9 +38,13 @@
 			<p></p>
 
 			<fieldset>
-			<h2>Total Likes : <u>{{totallikes}}</u></h2><br>
-			<h2>Company wast treding on <u>{{mosttrending}}</u> days</h2><br>
-			<h2>Company was Tagged in Most number of tweets on <u>{{mosttweets[0][0]}}</u> with <u>{{mosttweets[0][1]}} </u> tweets</h2><br>
+			<h2>Record number of tweets were on <u>{{ mosttweets[0][0] }}</u> with <u>{{mosttweets[0][1]}} tweets</u></h2>
+			<br>
+			<h2>Longest most trending streak was of <u>{{ longest_streak[2] }} days</u> from <u>{{ longest_streak[0] }}</u> to <u>{{ longest_streak[1] }}</u></h2>
+			<h2>Company was trending on <u>{{ mosttrending }} days</u></h2>
+			<br>
+			<h2>Total Likes: <u>{{totallikes}}</u></h2>
+			<br>
 			</fieldset>
 
 			<p></p>

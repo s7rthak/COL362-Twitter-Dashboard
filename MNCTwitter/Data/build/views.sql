@@ -1,47 +1,31 @@
-CREATE VIEW recommendations(u, recommendation, distance) AS
-WITH RECURSIVE connects (u, rec_u, distance) AS 
-(
-	SELECT user_id2, user_id1, 1
-	FROM follower f
-	WHERE user_id1 <> user_id2
-
-	UNION
-
-	SELECT u, user_id1, distance + 1
-	FROM connects, follower
-	WHERE distance < 2 AND user_id2 = rec_u
-	AND user_id1 <> u
-)
-SELECT u, rec_u, MIN(distance)
-FROM connects
-GROUP BY u, rec_u
-HAVING MIN(distance) > 1;
-
 CREATE VIEW company_tweet_stats(day, ticker_symbol, tweet_num, rank) AS
 SELECT DATE(TO_TIMESTAMP(t.post_date)), ct.ticker_symbol, COUNT(*), rank() 
 	OVER(PARTITION BY DATE(TO_TIMESTAMP(t.post_date)) ORDER BY COUNT(*) DESC)
 FROM tweet t, company_tweet ct
 WHERE ct.tweet_id = t.tweet_id
-GROUP BY DATE(TO_TIMESTAMP(t.post_date)), ct.ticker_symbol; 
+GROUP BY DATE(TO_TIMESTAMP(t.post_date)), ct.ticker_symbol;
 
--- CREATE MATERIALIZED VIEW streaks(ticker_symbol, start_date, end_date, length) AS
--- WITH day_toppers AS (SELECT day, ticker_symbol FROM company_tweet_stats WHERE rank = 1),
--- RECURSIVE all_streaks(ticker_symbol, start_date, end_date, length) AS
--- (
--- 	SELECT ticker_symbol, day, day, 1 FROM day_toppers
+CREATE MATERIALIZED VIEW streaks(ticker_symbol, start_date, end_date, length) AS
+WITH RECURSIVE all_streaks(ticker_symbol, start_date, end_date, length) AS
+(
+	SELECT ticker_symbol, day, day, 1 FROM day_toppers
 
--- 	UNION
+	UNION
 
--- 	SELECT ticker_symbol, start_date, day, length + 1, rank()
--- 		OVER(PARTITION BY ticker_symbol ORDER BY length DESC, start_date DESC)
--- 	FROM all_streaks ast, day_toppers dt
--- 	WHERE
--- 		dt.ticker_symbol = all_streaks.ticker_symbol AND 
--- 		day = end_date + '1 day'::interval
--- )
--- SELECT ticker_symbol, start_date, end_date, length
--- FROM all_streaks
--- GROUP BY ticker_symbol
+	SELECT ast.ticker_symbol, start_date, day, length + 1
+	FROM all_streaks ast, day_toppers dt
+	WHERE
+		dt.ticker_symbol = ast.ticker_symbol AND 
+		day = end_date + '1 day'::interval
+),
+day_toppers AS (SELECT day, ticker_symbol FROM company_tweet_stats WHERE rank = 1)
+SELECT ticker_symbol, start_date, end_date, length FROM
+	(
+		SELECT ticker_symbol, start_date, end_date, length, rank()
+				OVER(PARTITION BY ticker_symbol ORDER BY length DESC, start_date DESC)
+		FROM all_streaks
+	) rankfilter
+WHERE rank = 1;
 
 
 CREATE MATERIALIZED VIEW popular_users(user_id, user_name) AS
