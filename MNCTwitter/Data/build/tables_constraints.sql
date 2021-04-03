@@ -95,11 +95,11 @@ CREATE TABLE tweet_hash (
 
 	-- foreign key constraints
 	-- * company_tweet *
-		ALTER TABLE company_tweet add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id);
+		ALTER TABLE company_tweet add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id) ON DELETE CASCADE;
 
 	-- * tweet *
-		ALTER TABLE tweet add constraint writer_id_ref foreign key (writer_id) references users(user_id);
-		ALTER TABLE tweet add constraint original_tweet_id_ref foreign key (original_tweet_id) references tweet(tweet_id);
+		ALTER TABLE tweet add constraint writer_id_ref foreign key (writer_id) references users(user_id) ON DELETE CASCADE;
+		ALTER TABLE tweet add constraint original_tweet_id_ref foreign key (original_tweet_id) references tweet(tweet_id) ON DELETE CASCADE;
 
 	-- numbers
 	ALTER TABLE tweet add constraint comment_num_positive check (comment_num >= 0);
@@ -112,13 +112,13 @@ CREATE TABLE tweet_hash (
 
 -- **** follower ****
 	-- foreign key constraints
-	ALTER TABLE follower add constraint user_id1_ref foreign key (user_id1) references users(user_id);
-	ALTER TABLE follower add constraint user_id2_ref foreign key (user_id2) references users(user_id);
+	ALTER TABLE follower add constraint user_id1_ref foreign key (user_id1) references users(user_id) ON DELETE CASCADE;
+	ALTER TABLE follower add constraint user_id2_ref foreign key (user_id2) references users(user_id) ON DELETE CASCADE;
 
 -- **** favourite ****
 	-- foreign key constraints
-	ALTER TABLE favourite add constraint user_id_ref foreign key (user_id) references users(user_id);
-	ALTER TABLE favourite add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id);
+	ALTER TABLE favourite add constraint user_id_ref foreign key (user_id) references users(user_id) ON DELETE CASCADE;
+	ALTER TABLE favourite add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id) ON DELETE CASCADE;
 
 -- **** comment ****
 	-- key constraints
@@ -126,14 +126,14 @@ CREATE TABLE tweet_hash (
 	ALTER TABLE comment add constraint comment_id_unique UNIQUE (comment_id);
 
 	-- foreign key constraints
-	ALTER TABLE comment add constraint user_id_comment_ref foreign key (user_id) references users(user_id);
-	ALTER TABLE comment add constraint tweet_id_comment_ref foreign key (tweet_id) references tweet(tweet_id);
+	ALTER TABLE comment add constraint user_id_comment_ref foreign key (user_id) references users(user_id) ON DELETE CASCADE;
+	ALTER TABLE comment add constraint tweet_id_comment_ref foreign key (tweet_id) references tweet(tweet_id) ON DELETE CASCADE;
 
 -- **** report ****
 	-- foreign key constraints
-	ALTER TABLE report add constraint user_id_ref foreign key (user_id) references users(user_id);
-	ALTER TABLE report add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id);
+	ALTER TABLE report add constraint user_id_ref foreign key (user_id) references users(user_id) ON DELETE CASCADE;
+	ALTER TABLE report add constraint tweet_id_ref foreign key (tweet_id) references tweet(tweet_id) ON DELETE CASCADE;
 
 -- **** tweet_hash ****
 	-- foreign key constraints
-	ALTER TABLE tweet_hash add constraint tweet_id_tweet_hash_ref foreign key (tweet_id) references tweet(tweet_id);
+	ALTER TABLE tweet_hash add constraint tweet_id_tweet_hash_ref foreign key (tweet_id) references tweet(tweet_id) ON DELETE CASCADE;
