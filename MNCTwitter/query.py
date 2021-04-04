@@ -107,7 +107,7 @@ delete_comment_query = "DELETE FROM comment WHERE comment_id = %s"
 
 get_companies_query = "SELECT DISTINCT ticker_symbol FROM company_tweet WHERE tweet_id = %s"
 
-get_all_user_ids_query = "SELECT user_id FROM users"
+get_all_user_ids_query = "SELECT user_id FROM users LIMIT 1000"
 
 get_user_info_query = "SELECT * FROM users WHERE user_id = %s"
 
