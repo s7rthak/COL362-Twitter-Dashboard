@@ -50,11 +50,13 @@ WITH popular_hashes AS
 	ORDER BY COUNT(*) DESC
 	LIMIT 20
 )
-SELECT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id, ph.hash, ph.tweet_num
-FROM tweet, users, tweet_hash th, popular_hashes ph
-WHERE
-	writer_id = user_id AND
-	tweet.tweet_id = th.tweet_id AND
-	th.hash = ph.hash
-ORDER BY ph.tweet_num DESC, ph.hash ASC, post_date DESC
-LIMIT 100;
+SELECT * FROM
+(
+	SELECT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id, ph.hash, ph.tweet_num, ROW_NUMBER () OVER(PARTITION BY ph.hash ORDER BY ph.tweet_num DESC, post_date DESC)
+	FROM tweet, users, tweet_hash th, popular_hashes ph
+	WHERE
+		writer_id = user_id AND
+		tweet.tweet_id = th.tweet_id AND
+		th.hash = ph.hash
+) row_filter
+WHERE row_number <= 100;
