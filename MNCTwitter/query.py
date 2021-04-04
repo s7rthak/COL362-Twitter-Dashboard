@@ -26,7 +26,7 @@ get_user_name_query = "SELECT user_name FROM users WHERE user_id = %s"
 get_company_name_query = "SELECT company_name FROM company WHERE ticker_symbol = %s"
 
 get_all_user_hash_tweets_query = \
-"SELECT DISTINCT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id \
+"SELECT DISTINCT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id, tweet.like_num, tweet.retweet_num, tweet.report_num, tweet.comment_num \
 FROM tweet, users, company_tweet \
 WHERE \
 	writer_id = user_id AND \
@@ -35,10 +35,10 @@ WHERE \
 	ticker_symbol = ANY(%s) AND \
 	(SELECT COUNT(*) FROM ((SELECT hash FROM tweet_hash WHERE tweet.tweet_id = tweet_hash.tweet_id) INTERSECT (SELECT * FROM unnest(%s))) common_hashes) > 0 AND \
 	post_date >= %s \
-	ORDER BY "
+	ORDER BY tweet."
 
 get_all_user_tweets_query = \
-"SELECT DISTINCT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id \
+"SELECT DISTINCT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id, tweet.like_num, tweet.retweet_num, tweet.report_num, tweet.comment_num \
 FROM tweet, users, company_tweet \
 WHERE \
 	writer_id = user_id AND \
@@ -46,10 +46,10 @@ WHERE \
 	 \
 	ticker_symbol = ANY(%s) AND \
 	post_date >= %s \
-	ORDER BY "
+	ORDER BY tweet."
 
 get_hash_tweets_query = \
-"SELECT DISTINCT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id \
+"SELECT DISTINCT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id, tweet.like_num, tweet.retweet_num, tweet.report_num, tweet.comment_num \
 FROM tweet, users, company_tweet \
 WHERE \
 	writer_id = user_id AND \
@@ -59,10 +59,10 @@ WHERE \
 	ticker_symbol = ANY(%s) AND \
 	(SELECT COUNT(*) FROM ((SELECT hash FROM tweet_hash WHERE tweet.tweet_id = tweet_hash.tweet_id) INTERSECT (SELECT * FROM unnest(%s))) common_hashes) > 0 AND \
 	post_date >= %s \
-	ORDER BY "
+	ORDER BY tweet."
 
 get_tweets_query = \
-"SELECT DISTINCT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id \
+"SELECT DISTINCT tweet.tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id, tweet.like_num, tweet.retweet_num, tweet.report_num, tweet.comment_num \
 FROM tweet, users, company_tweet \
 WHERE \
 	writer_id = user_id AND \
@@ -71,7 +71,7 @@ WHERE \
 	writer_id = ANY(%s) AND \
 	ticker_symbol = ANY(%s) AND \
 	post_date >= %s \
-	ORDER BY "
+	ORDER BY tweet."
 
 get_tweet_query = \
 "SELECT tweet_id, writer_id, user_name, body, post_date, tweet.comment_num, tweet.retweet_num, tweet.like_num, tweet.report_num, is_retweet, original_tweet_id \
