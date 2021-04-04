@@ -207,6 +207,9 @@ def user(user_id_page):
 	if not user_id:
 		return redirect(url_for("login"))
 
+	if not check_available_user_db(user_id):
+		return redirect(url_for("message", msg = "This user is not available."))
+
 	common_follow_list = get_common_follow_list_db(user_id, user_id_page)
 	common_follow_num = len(common_follow_list)
 	common_follower_list = get_common_follower_list_db(user_id, user_id_page)
@@ -362,6 +365,9 @@ def tweet(tweet_id):
 	global user_id, user_name
 	if not user_id:
 		return redirect(url_for("login"))
+
+	if not check_available_tweet_db(tweet_id):
+		return redirect(url_for("message", msg = "This tweet is not available."))
 
 	if request.method == "POST":
 		if request.form.get("LIKE"):
