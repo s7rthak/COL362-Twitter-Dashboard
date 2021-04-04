@@ -3,7 +3,6 @@ from query import *
 import time
 from datetime import datetime
 import re
-from timing import *
 
 # **************** MANAGING DATABASE CONNECTIONS ****************
 
@@ -26,7 +25,7 @@ def convert_timestamp(ind):
 		return tuple(new_tup)
 	return convert_timestamp_index
 
-def connect_db(host, database, user, password):
+def connect_db(host, port, database, user, password):
 	""" Connect to the PostgreSQL database server """
 	print("Connecting to the PostgreSQL database...")
 
@@ -34,11 +33,7 @@ def connect_db(host, database, user, password):
 		global conn, cur
 
 		# connect to the PostgreSQL server
-		conn = psycopg2.connect(host=host, database=database, user=user, password=password)
-
-		# for logging time
-		conn = psycopg2.connect(connection_factory=MyLoggingConnection, host=host, database=database, user=user, password=password)
-		conn.initialize(logger)
+		conn = psycopg2.connect(host=host, database=database, user=user, password=password, port=port)
 
 		# create a cursor
 		cur = conn.cursor()
