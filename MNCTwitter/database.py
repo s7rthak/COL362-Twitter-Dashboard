@@ -161,6 +161,11 @@ def get_tweets_db(user_ids, company_tickers, time_range, order_by):
 	cur.execute(get_tweets_query + order_by + " DESC LIMIT 100", (user_ids, company_tickers, after_time))
 	return list(map(convert_timestamp(4), cur.fetchall()))
 
+def check_available_tweet_db(tweet_id):
+	""" Returns availability of tweet_id """
+	cur.execute(get_tweet_query, (tweet_id,))
+	return cur.fetchone() != None
+
 def get_tweet_db(tweet_id):
 	""" Returns tweet given tweet_id """
 	# tweet_info = 0: tweet_id, 1: writer_id, 2: user_name, 3: body, 4: post_date, 5: tweet.comment_num, 6: tweet.retweet_num, 7: tweet.like_num, 8: tweet.report_num, 9: is_retweet, 10: original_tweet_id
@@ -249,6 +254,11 @@ def get_all_user_ids_db():
 	""" Returns all valid user_ids """
 	cur.execute(get_all_user_ids_query)
 	return map(extract(0), cur.fetchall())
+
+def check_available_user_db(user_id):
+	""" returns whether user_id is availble or not """
+	cur.execute(get_user_info_query, (user_id,))
+	return cur.fetchone() != None
 
 def get_user_info_db(user_id):
 	""" Information of this user """
