@@ -120,10 +120,6 @@
 	FOR EACH ROW
 		EXECUTE PROCEDURE dec_retweet_num1();
 
--- INSERT into tweet_hash --
--- UPDATE tweet_hash --
-
-
 -- Actions and triggers in follower --
 
 -- trigger on users(tweet_id, follower_num) --
@@ -404,3 +400,21 @@
 	AFTER DELETE ON report
 	FOR EACH ROW
 		EXECUTE PROCEDURE dec_report_num1();
+
+-- DELETE highly reported tweet
+	-- DELETE comment
+	CREATE OR REPLACE FUNCTION del_tweet_on_report() RETURNS TRIGGER AS
+	$BODY$
+	BEGIN
+		DELETE FROM tweet
+		WHERE report_num >= 99 AND like_num <= report_num / 2;
+
+		RETURN old;
+	END;
+	$BODY$
+	language plpgsql;
+
+	CREATE TRIGGER DelTweetOnReport
+	AFTER INSERT ON report
+	FOR EACH ROW
+		EXECUTE PROCEDURE del_tweet_on_report();
