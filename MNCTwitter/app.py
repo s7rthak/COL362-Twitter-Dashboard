@@ -552,10 +552,10 @@ def terms_and_privacy():
 
 if __name__ == "__main__":
 	# connect to the PostgreSQL server
-	connect_db(host="localhost", database=sys.argv[1], user="dbms_project", password="dbms_project")
+	connect_db(host="10.17.5.99", port=5432, database="group_21", user="group_21", password="PqMuYunnHx9XC")
 
 	# Starting the server
-	app.run(debug = True) # Debug mode will give us the bugger that we can use in a browser and auto-reload function
+	app.run(host="localhost", port=5021, debug = True) # Debug mode will give us the bugger that we can use in a browser and auto-reload function
 
 	# closing the server
 	close_db()
