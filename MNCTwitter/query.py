@@ -224,6 +224,6 @@ get_longest_streak_query = \
 FROM streaks \
 WHERE ticker_symbol = %s"
 
-get_hash_tweets_query = "SELECT * FROM popular_hashes_tweets WHERE hash = %s"
+get_popular_hash_tweets_query = "SELECT * FROM popular_hashes_tweets WHERE hash = %s"
 
 get_popular_hashes_query = "SELECT hash FROM popular_hashes_tweets GROUP BY hash, tweet_num ORDER BY tweet_num"
