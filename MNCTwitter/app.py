@@ -55,7 +55,7 @@ def home():
 			hashtag = key
 
 		tweets_info = [["Showing tweets with popular hash: ", hashtag]]
-		tweets_list = get_hash_tweets_db(hashtag)
+		tweets_list = get_popular_hash_tweets_db(hashtag)
 		return render_template("read_tweets.html", usr = user_name, usr_id = user_id, image = image, tweets_info = tweets_info, tweets_list = tweets_list, tweets_num = len(tweets_list))
 
 	hashes = get_popular_hashes_db()
