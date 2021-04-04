@@ -31,7 +31,7 @@ WHERE rank = 1;
 CREATE MATERIALIZED VIEW popular_users(user_id, user_name) AS
 SELECT user_id, user_name
 FROM users
-ORDER BY ((like_num + comment_num - report_num) * (1 + retweet_num) * follower_num) DESC
+ORDER BY follower_num DESC
 LIMIT 500;
 
 CREATE MATERIALIZED VIEW popular_tweets(tweet_id, writer_id, user_name, body, post_date, is_retweet, original_tweet_id) AS
