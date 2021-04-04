@@ -369,7 +369,7 @@ def get_maxtweets_db(company_id):
 def get_hash_tweets_db(hashtag):
 	""" Returns all tweets of given hashtag fast """
 	cur.execute(get_hash_tweets_query, (hashtag,))
-	return cur.fetchall()
+	return list(map(convert_timestamp(4), cur.fetchall()))
 
 def get_popular_hashes_db():
 	""" returns popular hashtags fast """
