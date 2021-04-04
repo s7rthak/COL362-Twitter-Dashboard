@@ -54,7 +54,7 @@ f.write('user_name,password,tweet_num,follower_num,follow_num,comment_num,retwee
 user_table = dict()
 user_id = 0
 for user in tweet_counter:
-    f.write('\n' + user + ',' + user + ',0,0,0,0,0,0,0')
+    f.write('\n' + user + ',' + user + ',' + str(tweet_counter[user]) + ',' + str(follower_count[user_id]) + ',' + str(follow_count[user_id]) + ',0,0,0,0')
     user_table[user] = user_id
     user_id += 1
 
